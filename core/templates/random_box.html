@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Choose Category for the Random Message{% endblock %}
+
+{% block content %}
+
+<div class="choose-category-title">
+    Choose a category
+</div>
+
+<div class="choose-category-wrapper">
+    <form method="post" class="choose-category-form">
+        {% csrf_token %}
+
+        <button name="category" value="motivation" class="choose-btn up left">
+            <img src="{% static 'images/category-motivation.png' %}" alt="Motivation">
+        </button>
+
+        <button name="category" value="advice" class="choose-btn up right">
+            <img src="{% static 'images/category-advice.png' %}" alt="Advice">
+        </button>
+
+        <div class="box-start">
+            <img src="{% static 'images/box1.svg' %}" alt="box">
+        </div>
+
+        <button name="category" value="observation" class="choose-btn bottom left">
+            <img src="{% static 'images/category-observation.png' %}" alt="Observation">
+        </button>
+
+        <button name="category" value="confession" class="choose-btn bottom right">
+            <img src="{% static 'images/category-confession.png' %}" alt="Confession">
+        </button>
+
+    </form>
+</div>
+
+{% if opened_recently %}
+<div class="overlay show" id="boxLimitModal">
+    <div class="modal show">
+        <img src="{% static 'images/opened-limit-modal.png' %}" class="modal-bg" alt="Box Limit Modal">
+
+        <button class="modal-btn" onclick="closeModal('boxLimitModal')">
+            <img src="{% static 'images/ok_button.svg' %}" alt="Ok">
+        </button>
+    </div>
+</div>
+{% endif %}
+
+{% if no_boxes_left %}
+<div class="overlay show" id="noBoxesModal">
+    <div class="modal">
+        <img src="{% static 'images/no_boxes_modal.png' %}" class="modal-bg" alt="No Boxes Modal">
+
+        <button class="modal-btn" onclick="closeNoBoxesModal()">
+            <img src="{% static 'images/ok_button.svg' %}" alt="Ok">
+        </button>
+    </div>
+</div>
+{% endif %}
+
+<script>
+function closeModal(id) {
+    document.getElementById(id).classList.remove('show');
+}
+
+function closeNoBoxesModal() {
+    document.getElementById('noBoxesModal').classList.remove('show');
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<div class="start-page">
+    <div class="start-wrapper">
+        <div class="box-start">
+            <img src="{% static 'images/box1.svg' %}" alt="box">
+        </div>
+
+        <a href="{% url 'profile_opened_boxes' %}" class="profile-btn left">
+            <img src="{% static 'images/btn-profile-opened-boxes.png' %}" alt="Opened Boxes">
+            <div class="box-count">{{ opened_boxes_count }}</div>
+        </a>
+
+        <a href="{% url 'profile_created_boxes' %}" class="profile-btn right">
+            <img src="{% static 'images/btn-profile-created-boxes.png' %}" alt="Created Boxes">
+            <div class="box-count">{{ created_boxes_count }}</div>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

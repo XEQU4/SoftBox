@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Choose Category for the Message{% endblock %}
+
+{% block content %}
+
+<div class="choose-category-title">
+    Choose a category
+</div>
+
+<div class="choose-category-wrapper">
+    <form method="post" class="choose-category-form">
+        {% csrf_token %}
+
+        <button name="category" value="motivation" class="choose-btn up left">
+            <img src="{% static 'images/category-motivation.png' %}" alt="Motivation">
+        </button>
+
+        <button name="category" value="advice" class="choose-btn up right">
+            <img src="{% static 'images/category-advice.png' %}" alt="Advice">
+        </button>
+
+        <div class="box-start">
+            <img src="{% static 'images/box1.svg' %}" alt="box">
+        </div>
+
+        <button name="category" value="observation" class="choose-btn bottom left">
+            <img src="{% static 'images/category-observation.png' %}" alt="Observation">
+        </button>
+
+        <button name="category" value="confession" class="choose-btn bottom right">
+            <img src="{% static 'images/category-confession.png' %}" alt="Confession">
+        </button>
+
+    </form>
+</div>
+
+{% endblock %}

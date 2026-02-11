@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create Message{% endblock %}
+
+{% block content %}
+<div class="message-wrapper">
+    <div class="modal write-modal">
+        <img
+                src="{% static 'images/write_message_bg.png' %}"
+                class="modal-bg"
+                alt="Write message background"
+        >
+
+        <form method="post" action="{% url 'create_message' %}">
+            {% csrf_token %}
+
+            <textarea name="message"
+                      class="message-input"
+                      placeholder="Write here everything that is on your mind."
+                      required></textarea>
+
+            <a href="{% url 'start' %}" class="modal-btn left">
+                <img src="{% static 'images/cancel_btn.png' %}">
+            </a>
+
+            <button type="submit" class="modal-btn right">
+                <img src="{% static 'images/next_btn.png' %}">
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

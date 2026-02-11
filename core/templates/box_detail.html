@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="box-page">
+
+    <div class="box-container">
+        <img src="{% static 'images/box-background.png' %}" class="box-bg" alt="box">
+
+        <div class="box-text">
+            {{ box.text }}
+        </div>
+
+        <div class="box-actions">
+            <div class="box-number">
+                {{ box.number }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Boxes{% endblock %}
+
+{% block content %}
+
+<div class="profile-page">
+
+    <h1 class="profile-title">My Boxes</h1>
+
+    <div class="boxes-container">
+
+        <div class="boxes-row header">
+            <div class="cell">Box number</div>
+            <div class="cell">Category</div>
+            <div class="cell">Comments num</div>
+        </div>
+
+        {% for box in boxes %}
+            <div class="boxes-row">
+                <a href="{% url 'box_detail' box.number %}" class="cell box-link">{{ box.number }}</a>
+                <div class="cell">{{ box.get_category_display }}</div>
+                <div class="cell">{{ box.comments_count }}</div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

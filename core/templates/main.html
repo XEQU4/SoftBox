@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Authentication{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    SoftBox — anonymous messages
+</h1>
+
+<div class="main-container">
+
+    <div class="box" onclick="openInfoModal()">
+        <img src="{% static 'images/box1.svg' %}" alt="box1">
+    </div>
+
+    <div class="divider"></div>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Log in to continue</p>
+        <label for="name">
+            <input inputmode="text" id="name" name="username" placeholder="Your name" required>
+        </label>
+        <label for="password">
+            <input inputmode="numeric" id="password" name="password" placeholder="Password" required>
+        </label>
+        <button type="submit">Continue</button>
+    </form>
+
+</div>
+
+<script>
+    function openInfoModal() {
+        window.location.href = "?info=1";
+    }
+
+    function closeModal() {
+        window.location.href = "/";
+    }
+</script>
+
+<div id="overlay" class="overlay {% if show_info_modal or show_error_modal %}show{% endif %}">
+    <div class="modal">
+        {% if show_info_modal %}
+            <img src="{% static 'images/box_modal.png' %}" alt="info" class="modal-bg">
+        {% elif show_error_modal %}
+            <img src="{% static 'images/pass_err_modal.png' %}" alt="info" class="modal-bg">
+        {% endif %}
+        <button class="modal-btn" onclick="closeModal()">
+            <img src="{% static 'images/ok_button.svg' %}" alt="Ok">
+        </button>
+    </div>
+</div>
+
+{% endblock %}

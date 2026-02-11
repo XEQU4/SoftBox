@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Start Menu{% endblock %}
+
+{% block content %}
+
+<div class="start-title">
+    Speak freely here, {{ user.username }}
+</div>
+
+<div class="start-page">
+    <div class="start-wrapper">
+        {% if opened_recently %}
+            <button class="start-btn left" type="button" onclick="openModal('boxLimitModal')">
+                <img src="{% static 'images/btn-random-box.png' %}" alt="Create Message">
+            </button>
+        {% else %}
+            <a href="{% url 'random_box' %}" class="start-btn left">
+                <img src="{% static 'images/btn-random-box.png' %}" alt="Random Box">
+            </a>
+        {% endif %}
+
+        <div class="box-start">
+            <img src="{% static 'images/box1.svg' %}" alt="box">
+        </div>
+
+        {% if created_recently %}
+            <button class="start-btn right" type="button" onclick="openModal('createLimitModal')">
+                <img src="{% static 'images/btn-anonymous.png' %}" alt="Create Message">
+            </button>
+        {% else %}
+            <a href="{% url 'create_message' %}" class="start-btn right">
+                <img src="{% static 'images/btn-anonymous.png' %}" alt="Create Message">
+            </a>
+        {% endif %}
+
+        <a href="{% url 'profile' %}" class="start-btn bottom">
+            <img src="{% static 'images/btn-profile.png' %}" alt="Profile">
+        </a>
+    </div>
+</div>
+
+{% if show_created_modal %}
+<div class="overlay show" id="createdModal">
+    <div class="modal">
+        <img src="{% static 'images/created_modal.png' %}" class="modal-bg" alt="Created Message Modal">
+
+        <div class="box-number">
+            {{ created_box_number }}
+        </div>
+
+        <button class="modal-btn" onclick="closeCreatedModal()">
+            <img src="{% static 'images/ok_button.svg' %}" alt="Ok">
+        </button>
+    </div>
+
+</div>
+{% endif %}
+
+{% if opened_recently %}
+<div class="overlay" id="boxLimitModal">
+    <div class="modal">
+        <img src="{% static 'images/opened-limit-modal.png' %}" class="modal-bg" alt="Box Limit Modal">
+
+        <button class="modal-btn" onclick="closeModal('boxLimitModal')">
+            <img src="{% static 'images/ok_button.svg' %}" alt="Ok">
+        </button>
+    </div>
+</div>
+{% endif %}
+
+{% if created_recently %}
+<div class="overlay" id="createLimitModal">
+    <div class="modal">
+        <img src="{% static 'images/limit_modal.png' %}" class="modal-bg" alt="Create Message Limit Modal">
+
+        <button class="modal-btn" onclick="closeModal('createLimitModal')">
+            <img src="{% static 'images/ok_button.svg' %}" alt="Ok">
+        </button>
+    </div>
+</div>
+{% endif %}
+
+<script>
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.add('show');
+    }
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.remove('show');
+    }
+}
+
+function openCreatedModal() {
+    document.getElementById('createdModal').classList.add('show');
+}
+
+function closeCreatedModal() {
+    document.getElementById('createdModal').classList.remove('show');
+}
+</script>
+
+{% endblock %}
